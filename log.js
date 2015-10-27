@@ -96,7 +96,6 @@ var timeoutfunction = function(){
 		log.checklogfile();
 	}
 	var now = new Date().getTime();
-	console.log('timeoutfunction' + now);
 	var timeto = 24*60*60*1000 + gettodaytime() - now;
 	setTimeout(timeoutfunction,timeto+2);	
 };
