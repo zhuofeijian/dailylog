@@ -80,6 +80,7 @@ Log.prototype.checklogfile = function(){
 
 var getlog = function(config){
 	config.logdir = PATH.resolve(config.logdir || '.');
+    config.name = config.name || 'log';
 	var key = PATH.join(config.logdir,config.name);
 	var log = logs[key];
 	if(log){
