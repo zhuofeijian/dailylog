@@ -1,6 +1,6 @@
 {
   "name": "dailylog",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a very simple nodejs daily log,just log thinks day by day on filesystem",
   "author": "zhuofeijian <zhuofeijian@gmail.com>",
   "keywords": [
