@@ -1,0 +1,24 @@
+{
+  "name": "dailylog",
+  "version": "0.0.0",
+  "description": "a very simple nodejs daily log,just log thinks day by day on filesystem",
+  "author": "zhuofeijian <zhuofeijian@gmail.com>",
+  "keywords": [
+    "daily",
+    "log",
+    "day by day"
+  ],
+  "dependencies": {
+    "mkdirp": ">=0.0.0",
+    "dateformat": ">=0.0.0"
+  },
+  "main": "log.js",
+  "repository" :
+  { "type" : "git",
+	"url" : "https://github.com/zhuofeijian/dailylog"
+  },
+  "bugs": {
+	"url": "https://github.com/zhuofeijian/dailylog/issues"
+  },
+  "license": "MIT"
+}
