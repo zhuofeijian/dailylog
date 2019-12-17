@@ -1,4 +1,4 @@
-# dailylog -- A daily log for Node.js
+# dailylog
 
 Very simple Node.js daily log, just log things day by day on filesystem.
 
