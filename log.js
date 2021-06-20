@@ -25,7 +25,7 @@ var Log = function(config){
 		this.dirok = false;
 		this.err = null;
 		var SELF = this;
-		mkdirp(this.logdir,function (err) {
+		mkdirp(this.logdir,{},function (err) {
 			if (err){
 				console.log('Log:' + err.stack);
 				SELF.err = err;
