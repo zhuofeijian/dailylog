@@ -20,25 +20,25 @@ var gettodaystr = function(date){
 var logs = {};
 
 var Log = function(config){
-		this.logdir = config.logdir;
-		this.name = config.name;
-		this.dirok = false;
-		this.err = null;
-		var SELF = this;
-		mkdirp(this.logdir,{},function (err) {
-			if (err){
-				console.log('Log:' + err.stack);
-				SELF.err = err;
-				return;
-			}
-			SELF.dirok = true;
-			if(SELF.msgs){
-				for(var i = 0 ; i < SELF.msgs.length ; i ++){
-					SELF.log(SELF.msgs[i],true);
-				}
-				delete SELF.msgs;
-			}
-		});
+	this.logdir = config.logdir;
+	this.name = config.name;
+	this.dirok = false;
+	this.err = null;
+	var SELF = this;	
+	mkdirp(this.logdir).then(function (err) {
+		if (err){
+		    console.log('Log:' + err.stack);
+		    SELF.err = err;
+		    return;
+		}
+		SELF.dirok = true;
+		if(SELF.msgs){
+		    for(var i = 0 ; i < SELF.msgs.length ; i ++){
+			SELF.log(SELF.msgs[i],true);
+		    }
+		    delete SELF.msgs;
+		}
+    });
 };
 
 Log.prototype.log = function(msg,notime){
@@ -80,7 +80,7 @@ Log.prototype.checklogfile = function(){
 
 var getlog = function(config){
 	config.logdir = PATH.resolve(config.logdir || '.');
-    config.name = config.name || 'log';
+    	config.name = config.name || 'log';
 	var key = PATH.join(config.logdir,config.name);
 	var log = logs[key];
 	if(log){
