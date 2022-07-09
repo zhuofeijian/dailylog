@@ -9,8 +9,8 @@ code like
 var logger = require('dailylog').getlog({logdir:'./logs',name:'mylog'});  
 logger.log('hello,world');
 
-then you will see log at ./logs/mylog-yyyy-mm-dd.txt,  
-and the content like 'hh:mm:ss.SSS|hello,world'
+then you will see log at ./logs/mylog-2022-07-09.txt,
+and the content like "16:29:38.316|hello,world"
 
 
 #how to install
