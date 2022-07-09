@@ -1,7 +1,5 @@
 var fs = require('fs');
-var mkdirp = require('mkdirp');
 var PATH = require('path');
-
 
 const dateFormat = function(date,fmt) {
     if(typeof date == 'number'){
@@ -37,7 +35,6 @@ const dateFormat = function(date,fmt) {
 }
 
 
-
 var gettodaytime = function(){
 	var date = new Date();
 	date.setHours(0);
@@ -59,8 +56,8 @@ var Log = function(config){
 	this.name = config.name;
 	this.dirok = false;
 	this.err = null;
-	var SELF = this;	
-	mkdirp(this.logdir).then(function (err) {
+	var SELF = this;
+	fs.mkdir(this.logdir,{ recursive: true }, (err) => {
 		if (err){
 		    console.log('Log:' + err.stack);
 		    SELF.err = err;
@@ -73,7 +70,7 @@ var Log = function(config){
 		    }
 		    delete SELF.msgs;
 		}
-    });
+  	});	
 };
 
 Log.prototype.log = function(msg,notime){
