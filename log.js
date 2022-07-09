@@ -2,9 +2,11 @@ var fs = require('fs');
 var PATH = require('path');
 
 const dateFormat = function(date,fmt) {
-    if(typeof date == 'number'){
+    
+	if(typeof date == 'number'){
         date = new Date(date);
     }
+
     var o = { 
        "M+" : date.getMonth()+1,                 //月份 
        "d+" : date.getDate(),                    //日 
@@ -30,7 +32,6 @@ const dateFormat = function(date,fmt) {
         fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (s) : (("000"+ s).substr((""+ s).length)));
     }
 
-
     return fmt; 
 }
 
@@ -46,7 +47,7 @@ var gettodaytime = function(){
 
 var gettodaystr = function(date){
 	date = date || new Date();
-	return dateFormat(date,"yyyy-mm-dd");
+	return dateFormat(date,"yyyy-MM-dd");
 }
 
 var logs = {};
@@ -54,6 +55,7 @@ var logs = {};
 var Log = function(config){
 	this.logdir = config.logdir;
 	this.name = config.name;
+	this.timeFormat = config.timeFormat || 'hh:mm:ss.SSS|';
 	this.dirok = false;
 	this.err = null;
 	var SELF = this;
@@ -70,13 +72,13 @@ var Log = function(config){
 		    }
 		    delete SELF.msgs;
 		}
-  	});	
+  	});
 };
 
 Log.prototype.log = function(msg,notime){
 	
 	if(!notime){
-		var d = dateFormat(new Date(),'HH:MM:ss>');
+		var d = dateFormat(new Date(),this.timeFormat);
 		var msg = d + msg + "\n";
 	}
 
@@ -85,7 +87,7 @@ Log.prototype.log = function(msg,notime){
 			this.msgs = [];
 		}
 		this.msgs.push(msg);
-		if(this.msgs.length>50){//only cache 50 when dir not ok
+		if(this.msgs.length>1000){//only cache 1000 when dir not ok
 			this.msgs.shift();
 		}
 		return;
@@ -93,7 +95,7 @@ Log.prototype.log = function(msg,notime){
 
 	if(!this.writable){
 		var datestr = gettodaystr();
-		var path = PATH.join(this.logdir,this.name+ "_" + datestr + '.txt');
+		var path = PATH.join(this.logdir,this.name+ "-" + datestr + '.txt');
 		this.writable = fs.createWriteStream(path,{flags:'a'});
 		this.writable.datestr = datestr;
 	}
@@ -135,3 +137,11 @@ var timeoutfunction = function(){
 setTimeout(timeoutfunction,1);
 
 exports.getlog = getlog;
+
+/*
+var test = function(){
+	var logger = getlog({logdir:'./logs',name:'mylog'});
+	logger.log('hello,world');
+}
+test();
+*/
