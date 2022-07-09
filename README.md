@@ -5,10 +5,10 @@ a very simple nodejs daily log,just log things day by day on filesystem
 
 code like  
 var logger = require('dailylog').getlog({logdir:'./logs',name:'mylog'});  
-logger.log('modulea>funa>something happen here');
+logger.log('hello,world');
 
-then you will see log at ./logs/mylog_yyyy-mm-dd.txt,  
-and the content like 'HH:MM:SS>modulea>funa>something happen here'
+then you will see log at ./logs/mylog-yyyy-mm-dd.txt,  
+and the content like 'hh:mm:ss.SSS|hello,world'
 
-#how to install
+#how to install\n
 npm install dailylog
